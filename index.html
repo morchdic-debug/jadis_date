@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Jadis! ✨</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        p {
+            color: #4a4a4a;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .gif-container img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s ease, background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #ff3356;
+        }
+
+        #noBtn {
+            background-color: #e0e0e0;
+            color: #555;
+            position: absolute;
+            left: 55%;
+        }
+
+        .bribe-btn {
+            background-color: #fff0f3;
+            color: #ff4d6d;
+            border: 2px dashed #ff4d6d;
+            font-size: 0.95rem;
+            padding: 8px 15px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .bribe-text {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #d93856;
+            min-height: 24px;
+        }
+
+        .slider-container {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 10px;
+            background: #ffd0d6;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ff4d6d;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+        }
+
+        .hype-label {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4d6d;
+            margin-top: 10px;
+        }
+
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-card {
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.2s;
+        }
+
+        .option-card:hover {
+            border-color: #ffcc00;
+            background-color: #fffdf5;
+        }
+
+        .option-card.selected {
+            border-color: #ff4d6d;
+            background-color: #fff0f3;
+            color: #ff4d6d;
+        }
+
+        .select-title {
+            text-align: left;
+            font-weight: bold;
+            margin: 1rem 0 0.5rem 0;
+            color: #333;
+        }
+
+        #otherFoodContainer {
+            display: none;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .day-container {
+            margin-bottom: 2rem;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #ff4d6d;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            color: #333;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 1;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- PAGE 1: THE PROPOSAL -->
+        <div id="page1" class="page active">
+            <div class="gif-container">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f44b.png" alt="Waving hand" style="width: 80px; height: 80px;">
+            </div>
+            <h1>Jadis, will you go out on a date with me?</h1>
+            <p>Don't even try to say no. 😉</p>
+            
+            <div class="btn-container">
+                <button id="yesBtn" class="btn-primary" onclick="nextPage(2)">Yes!</button>
+                <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            </div>
+
+            <button class="bribe-btn" onclick="showBribe()">Still not sure? Click here for a hint/bribe</button>
+            <div id="bribeText" class="bribe-text"></div>
+        </div>
+
+        <!-- PAGE 2: THE HYPE METER -->
+        <div id="page2" class="page">
+            <div class="gif-container">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/2728.png" alt="Sparkles" style="width: 80px; height: 80px;">
+            </div>
+            <p>How excited are you for our date on a scale from 1 to 100?</p>
+            
+            <div class="slider-container">
+                <input type="range" min="1" max="100" value="50" class="slider" id="hypeSlider" oninput="updateHypeText(this.value)">
+                <div id="hypeValue" class="hype-label">50% Excited</div>
+                <div id="hypeComment" style="margin-top: 5px; font-style: italic; color: #666; height: 20px;">We can definitely aim higher!</div>
+            </div>
+
+            <button class="btn-primary" onclick="nextPage(3)">Lock it in! ➡️</button>
+        </div>
+
+        <!-- PAGE 3: DATE PREFERENCES -->
+        <div id="page3" class="page">
+            <h1>Let's customize our date ✨</h1>
+            <p>Pick your vibe and preferences:</p>
+
+            <div class="select-title">🍲 What do you feel like eating?</div>
+            <div class="grid-options" id="foodOptions">
+                <div class="option-card" onclick="selectFoodOption(this, 'Sushi 🍣')">Sushi 🍣</div>
+                <div class="option-card" onclick="selectFoodOption(this, 'Italian 🍝')">Italian 🍝</div>
+                <div class="option-card" onclick="selectFoodOption(this, 'Mediterranean 🥙')">Mediterranean 🥙</div>
+                <div class="option-card" onclick="selectFoodOption(this, 'Other')">Other ✍️</div>
+            </div>
+
+            <div id="otherFoodContainer">
+                <input type="text" id="otherFoodInput" class="custom-input" placeholder="Type what you want to eat...">
+            </div>
+
+            <div class="select-title">📅 What day works best for you?</div>
+            <div class="day-container">
+                <input type="text" id="dayInput" class="custom-input" placeholder="Type a day...">
+            </div>
+
+            <button class="btn-primary" style="width: 100%;" onclick="finishSelection()">Perfect, let's go! ❤️</button>
+        </div>
+
+        <!-- PAGE 4: FINAL SCREEN -->
+        <div id="page4" class="page">
+            <div class="gif-container">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f496.png" alt="Sparkling Heart" style="width: 90px; height: 90px;">
+            </div>
+            <h1>It's a date! 🥰</h1>
+            <p id="finalSummary"></p>
+            <p style="font-weight: bold; color: #ff4d6d;">Sounds like a plan, Jadis. Just look cute and I'll handle the rest! 🌹</p>
+        </div>
+
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        let selections = { food: '', day: '', hype: '50%' };
+        let isOtherSelected = false;
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function showBribe() {
+            const bribeText = document.getElementById('bribeText');
+            bribeText.innerText = "Perk #1: Free complimentary jacket if you get cold. 🧥✨";
+        }
+
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page' + pageNumber).classList.add('active');
+
+            if (pageNumber === 2) {
+                for (let i = 0; i < 40; i++) createConfetti();
+            }
+        }
+
+        function updateHypeText(val) {
+            selections.hype = val + "%";
+            document.getElementById('hypeValue').innerText = val + "% Excited";
+            const comment = document.getElementById('hypeComment');
+            if (val < 40) {
+                comment.innerText = "Are you sure? Try sliding it right... 👉";
+            } else if (val < 75) {
+                comment.innerText = "We can definitely aim higher!";
+            } else if (val < 95) {
+                comment.innerText = "That's what I'm talking about! 🔥";
+            } else {
+                comment.innerText = "Perfect score! Can't wait! 🕺";
+            }
+        }
+
+        function selectFoodOption(element, value) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const otherContainer = document.getElementById('otherFoodContainer');
+            const otherInput = document.getElementById('otherFoodInput');
+
+            if (value === 'Other') {
+                isOtherSelected = true;
+                otherContainer.style.display = 'block';
+                otherInput.focus();
+            } else {
+                isOtherSelected = false;
+                otherContainer.style.display = 'none';
+                selections.food = value;
+            }
+        }
+
+        function finishSelection() {
+            if (isOtherSelected) {
+                const customVal = document.getElementById('otherFoodInput').value.trim();
+                selections.food = customVal ? customVal : "Surprise / Other 🍽️";
+            }
+
+            const customDay = document.getElementById('dayInput').value.trim();
+            const food = selections.food || "Delicious Food 🍲";
+            const day = customDay || "Whenever you're free 📅";
+            const hype = selections.hype;
+
+            document.getElementById('finalSummary').innerHTML = `Locked details:<br><strong>Vibe:</strong> ${food}<br><strong>Day:</strong> ${day}`;
+            
+            nextPage(4);
+            
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+
+            fetch('https://formspree.io/f/xpqgznyr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    Target: "Jadis",
+                    Response: "YES!",
+                    HypeLevel: hype,
+                    FoodChoice: food,
+                    PreferredDay: day
+                })
+            }).catch(err => console.log("Complete."));
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confetti.style.backgroundColor = ['#ff4d6d', '#ffccd5', '#ffd0d6', '#ff758f', '#f2d74e'][Math.floor(Math.random() * 5)];
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => { confetti.remove(); }, 3000);
+        }
+    </script>
+</body>
+</html>
